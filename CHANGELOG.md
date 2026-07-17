@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.1] - 2026-07-18
+
+### Added
+- **Global Configuration**: Pengguna kini menyimpan kredensial di `~/.blogger-publisher/config.json`. Anda cukup melakukan otentikasi sekali seumur hidup dan bisa nge-blog dari *folder* mana saja tanpa memikirkan `.env`.
+- **Frontmatter Zod Validation**: Menambahkan sistem keamanan ekstra untuk mencegah `blogger-publisher` *crash* saat ada salah ketik (*typo*) pada metadata artikel.
+- **Auto Updater**: Menambahkan sistem pemeriksa pembaruan versi NPM secara *real-time*.
+- **Magic Bytes Image Detection**: Meningkatkan keandalan pengunggah gambar (*uploader*) dengan langsung membaca *binary header* ketimbang hanya mengandalkan ekstensi `.jpg` atau `.png`.
+- **Stdin Pipeline Support**: Penambahan fitur `publish -` untuk mempublikasikan artikel secara langsung dari *pipeline* terminal (cocok untuk integrasi dengan CLI/bot AI lain).
+
+### Changed
+- Perbaikan struktur logika penanganan error (*Unified Error Handling*) sehingga terminal kini lebih rapi tanpa tumpukan pesan *stack trace* panjang.
+
 ## [1.3.0] - 2026-07-18
 
 ### Added
