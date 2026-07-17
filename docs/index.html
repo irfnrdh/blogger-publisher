@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blogger Publisher CLI - The Ultimate Auto-Blogging Tool</title>
-    <meta name="description" content="Automate your Blogger publishing with Markdown, AI integration, Multi-CDN, and Smart Hashing.">
+    <title>Blogger Publisher CLI | The Ultimate Auto-Blogging Engine</title>
+    <meta name="description" content="A powerful open-source Node.js CLI to automate your Blogger publishing. Supports Multi-CDN, Smart Hashing, AI Agents, and 2-Way Sync.">
     
-    <!-- Google Fonts: Inter -->
+    <!-- Google Fonts: Inter & JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="style.css">
 </head>
@@ -18,56 +18,73 @@
     <!-- Ambient Glowing Orbs Background -->
     <div class="ambient-orb orb-1"></div>
     <div class="ambient-orb orb-2"></div>
+    <div class="ambient-orb orb-3"></div>
 
     <nav class="navbar glass">
-        <div class="logo">BloggerPublisher_</div>
+        <div class="logo">
+            <span class="logo-icon">🚀</span> BloggerPublisher
+        </div>
         <div class="nav-links">
             <a href="#features">Features</a>
-            <a href="#demo">Demo</a>
+            <a href="#how-it-works">How it Works</a>
             <a href="https://github.com/username-anda/blogger-publisher" target="_blank" class="btn-github">
                 <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
                     <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                 </svg>
-                GitHub
+                Star on GitHub
             </a>
         </div>
     </nav>
 
     <header class="hero">
         <div class="hero-content">
-            <span class="badge">v1.2.0 is out!</span>
+            <span class="badge">✨ v1.2.0 Released - Now with 2-Way Sync</span>
             <h1>The Ultimate <br><span class="gradient-text">Auto-Blogging</span> Engine</h1>
-            <p>Publish, sync, and manage thousands of Markdown articles to Google Blogger automatically. Designed for AI Agents and mass-scale content creators.</p>
+            <p>A developer-first CLI tool to manage, sync, and publish thousands of Markdown articles to Google Blogger. Designed for massive scale, Multi-CDN support, and seamless AI integrations.</p>
             
             <div class="cta-group">
-                <a href="#install" class="btn-primary">Get Started</a>
+                <a href="#install" class="btn-primary">Get Started Free</a>
                 <div class="install-cmd">
-                    <code>npm i -g blogger-publisher</code>
-                    <button class="copy-btn" onclick="navigator.clipboard.writeText('npm i -g blogger-publisher')">📋</button>
+                    <span class="cmd-text">npm i -g blogger-publisher</span>
+                    <button class="copy-btn" onclick="navigator.clipboard.writeText('npm i -g blogger-publisher')" title="Copy to clipboard">📋</button>
+                </div>
+            </div>
+            
+            <div class="social-proof">
+                <p>Loved by Developers & Autobloggers</p>
+                <div class="avatars">
+                    <div class="avatar"></div><div class="avatar"></div><div class="avatar"></div>
+                    <span>+1,000s of articles published</span>
                 </div>
             </div>
         </div>
 
         <div class="hero-visual" id="demo">
-            <div class="terminal glass">
+            <div class="terminal glass-card">
                 <div class="terminal-header">
-                    <span class="dot red"></span>
-                    <span class="dot yellow"></span>
-                    <span class="dot green"></span>
+                    <div class="dots">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                    </div>
                     <div class="terminal-title">bash - master</div>
                 </div>
                 <div class="terminal-body">
                     <div class="typewriter-line">
-                        <span class="prompt">$</span> <span class="typing">blogger-publisher publish ./articles</span>
+                        <span class="prompt">➜</span> <span class="folder">~</span> <span class="typing">blogger-publisher publish ./articles</span>
                     </div>
                     <div class="terminal-output">
-                        <p class="fade-in d-1">◇ injected env (4) from .env</p>
-                        <p class="fade-in d-2">📄 Memproses: belajar-ai.md</p>
-                        <p class="fade-in d-3">[BARU] Mengunggah artikel baru...</p>
-                        <p class="fade-in d-4 c-green">✅ BERHASIL Diunggah. ID Baru: 726612158057</p>
-                        <p class="fade-in d-5">📄 Memproses: post-seo.md</p>
-                        <p class="fade-in d-6 c-yellow">[SKIP] Tidak ada perubahan. Melewati...</p>
-                        <p class="fade-in d-7 c-green">🎉 PROSES BULK SELESAI!</p>
+                        <p class="fade-in d-1"><span class="c-dim">◇ injected env (4) from .env</span></p>
+                        <p class="fade-in d-2">Mencari file markdown di: ./articles...</p>
+                        <p class="fade-in d-3">========================================</p>
+                        <p class="fade-in d-4">📄 Memproses: belajar-ai-2026.md</p>
+                        <p class="fade-in d-5 c-blue">[UPLOAD] Menyimpan gambar ke ImgBB CDN...</p>
+                        <p class="fade-in d-6 c-green">✅ BERHASIL Diunggah. ID Baru: 726612158057</p>
+                        <p class="fade-in d-7">========================================</p>
+                        <p class="fade-in d-8">📄 Memproses: tips-kucing.md</p>
+                        <p class="fade-in d-9 c-yellow">[SKIP] Hashing identik. Melewati pembaruan...</p>
+                        <p class="fade-in d-10">========================================</p>
+                        <p class="fade-in d-11 c-green font-bold">🎉 PROSES BULK SELESAI!</p>
                     </div>
                 </div>
             </div>
@@ -76,36 +93,39 @@
 
     <section id="features" class="features-section">
         <div class="section-title">
-            <h2>Features that Feel Like Magic</h2>
-            <p>Built-in tools that normally cost hundreds of dollars a month, now running on your terminal.</p>
+            <h2 class="gradient-text">Enterprise-Grade Features</h2>
+            <p>Everything you need to turn a simple Blogger site into a massive content empire.</p>
         </div>
 
         <div class="features-grid">
-            <div class="feature-card glass">
-                <div class="feature-icon">🌐</div>
-                <h3>Multi-CDN Uploader</h3>
-                <p>Never worry about Google Drive bandwidth limits again. Upload local Markdown images directly to ImgBB, Cloudinary, or GitHub automatically.</p>
+            <div class="feature-card glass-card">
+                <div class="feature-icon icon-blue">🚀</div>
+                <h3>Multi-CDN Image Routing</h3>
+                <p>Never worry about Google Drive bandwidth limits again. Upload local Markdown images directly to ImgBB, Cloudinary, or GitHub jsDelivr automatically.</p>
             </div>
-            <div class="feature-card glass">
-                <div class="feature-icon">🔄</div>
+            <div class="feature-card glass-card">
+                <div class="feature-icon icon-purple">🔄</div>
                 <h3>2-Way Sync (Pull & Push)</h3>
                 <p>Already have 100 posts on Blogger? Run <code>pull</code> to download them all as Markdown files, edit them locally, and <code>publish</code> them back instantly.</p>
             </div>
-            <div class="feature-card glass">
-                <div class="feature-icon">🤖</div>
+            <div class="feature-card glass-card">
+                <div class="feature-icon icon-orange">🤖</div>
                 <h3>AI Agent Ready</h3>
-                <p>Comes with built-in <code>AGENT.md</code> and Skills. Tell your AI to "run autoblogging skill" and watch it generate and publish content on autopilot.</p>
+                <p>Comes with built-in <code>AGENT.md</code> and Skills. Tell your favorite AI to "run autoblogging" and watch it generate and publish content on autopilot.</p>
             </div>
-            <div class="feature-card glass">
-                <div class="feature-icon">⚡</div>
-                <h3>Smart Hashing</h3>
-                <p>Saves your API quota by hashing your Markdown files. If you don't change the content, it skips uploading. Instant deployment for thousands of files.</p>
+            <div class="feature-card glass-card">
+                <div class="feature-icon icon-green">⚡</div>
+                <h3>Smart Hashing & SEO</h3>
+                <p>Saves your API quota by hashing your files. If you don't change the content, it skips uploading. Includes Custom URL Slugs & Meta Descriptions.</p>
             </div>
         </div>
     </section>
 
     <footer class="footer">
-        <p>Built with ❤️ for the open-source community. Open source under MIT License.</p>
+        <div class="footer-content">
+            <div class="logo">BloggerPublisher_</div>
+            <p>Built with ❤️ for the open-source community. Open source under MIT License.</p>
+        </div>
     </footer>
 
 </body>
