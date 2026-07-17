@@ -5,6 +5,8 @@ const { runAuthFlow } = require('../lib/auth');
 const { runBulkPublisher } = require('../lib/publisher');
 const { runPuller } = require('../lib/pull');
 const { runInteractiveTui } = require('../lib/tui');
+const { checkUpdate } = require('../lib/updater');
+const { ZodError } = require('zod');
 const path = require('path');
 const pkg = require('../package.json');
 
@@ -40,12 +42,28 @@ program
     await runPuller(targetPath, options.blog);
   });
 
-// If no command is provided, run the interactive TUI
-if (!process.argv.slice(2).length) {
-  runInteractiveTui().catch((err) => {
-    console.error(err);
-    process.exit(1);
-  });
-} else {
-  program.parse(process.argv);
+async function main() {
+  const args = process.argv.slice(2);
+  const isInteractive = !args.length;
+
+  // Cek update terlebih dahulu
+  await checkUpdate(isInteractive);
+
+  if (isInteractive) {
+    await runInteractiveTui();
+  } else {
+    await program.parseAsync(process.argv);
+  }
 }
+
+main().catch((error) => {
+  if (error.response && error.response.data && error.response.data.error) {
+    console.error(`\n❌ API Error [${error.response.status}]: ${error.response.data.error.message}`);
+  } else if (error instanceof ZodError) {
+    console.error(`\n❌ Validation Error:`);
+    error.issues.forEach(issue => console.error(`   - ${issue.path.join('.')}: ${issue.message}`));
+  } else {
+    console.error(`\n❌ Error: ${error.message || String(error)}`);
+  }
+  process.exitCode = 1;
+});
