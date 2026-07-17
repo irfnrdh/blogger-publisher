@@ -1,6 +1,9 @@
 node_modules/
 .env
+credentials.json
+token.json
 articles/*.md
 !articles/.gitkeep
+articles-pulled/
 .DS_Store
 *.log
