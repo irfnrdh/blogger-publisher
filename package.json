@@ -2,10 +2,13 @@
   "name": "blogger-publisher",
   "version": "1.2.0",
   "description": "A powerful CLI to automate your Blogger publishing using Markdown, Multi-CDN, and AI Agents.",
-  "repository": "github:irfnrdh/blogger-publisher",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/irfnrdh/blogger-publisher.git"
+  },
   "main": "lib/publisher.js",
   "bin": {
-    "blogger-publisher": "./bin/cli.js"
+    "blogger-publisher": "bin/cli.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
