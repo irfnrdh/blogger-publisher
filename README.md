@@ -1,4 +1,9 @@
-# Blogger Publisher CLI (Markdown to Blogger API)
+<div align="center">
+  <img src="images/banner.png" alt="Blogger Publisher Banner" width="100%">
+  
+  # 🚀 Blogger Publisher CLI
+  <p><b>Markdown to Blogger API Automation</b></p>
+</div>
 
 Sebuah *tool automation* open-source berbasis Node.js yang memungkinkan Anda (atau Agen AI Anda) untuk mem-publish artikel secara massal (*bulk publish*) dari format Markdown (`.md`) ke Google Blogger, lengkap dengan dukungan *SEO*, upload gambar lokal otomatis, penjadwalan, dan sinkronisasi pintar!
 
