@@ -6,7 +6,7 @@ Sangat cocok digunakan sebagai penghubung (*bridge*) jika Anda memiliki AI yang 
 
 ## ✨ Fitur Utama
 - **NPM Global CLI**: Cukup ketik `blogger-publisher publish` dari mana saja!
-- **Auto Image Upload**: Menggunakan Google Drive API untuk meng-upload gambar lokal (contoh: `![alt](../images/foto.png)`) dan menyisipkan URL publiknya sebelum tayang.
+- **Multi-CDN Image Upload**: Mengubah gambar lokal secara otomatis menjadi tautan publik. Anda bebas memilih provider **Google Drive** (Default), **ImgBB**, **Cloudinary**, atau **GitHub** untuk menahan trafik jutaan pengunjung!
 - **Advanced SEO & Custom Slug**: Atur Meta Description dan permalink (URL) khusus yang tidak harus sama dengan judul artikel.
 - **Smart Hashing (Anti Duplikasi)**: Script sangat hemat kuota API. Ia tidak akan melakukan pembaruan jika isi teks `.md` tidak mengalami perubahan.
 - **Scheduling**: Atur tanggal `date` di masa depan untuk menjadwalkan penayangan (Blogger akan merilisnya secara otomatis).
