@@ -1,0 +1,21 @@
+{
+  "name": "blogger-publisher",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "glob": "^13.0.6",
+    "googleapis": "^173.0.0",
+    "gray-matter": "^4.0.3",
+    "marked": "^18.0.6"
+  }
+}

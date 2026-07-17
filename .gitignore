@@ -1,0 +1,6 @@
+node_modules/
+.env
+articles/*.md
+!articles/.gitkeep
+.DS_Store
+*.log
