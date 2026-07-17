@@ -2,15 +2,19 @@
   "name": "blogger-publisher",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "lib/publisher.js",
+  "bin": {
+    "blogger-publisher": "./bin/cli.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author":"irfnrdh",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "commander": "^15.0.0",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "glob": "^13.0.6",

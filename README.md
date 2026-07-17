@@ -1,15 +1,15 @@
-# Blogger Auto-Publisher (Markdown to Blogger API)
+# Blogger Publisher CLI (Markdown to Blogger API)
 
-Sebuah *tool automation* open-source berbasis Node.js yang memungkinkan Anda (atau agen AI Anda) untuk melakukan publikasi artikel secara massal (*bulk publish*) dari format Markdown (`.md`) ke Google Blogger, lengkap dengan dukungan penjadwalan dan pembaruan (*sync/update*) otomatis!
+Sebuah *tool automation* open-source berbasis Node.js yang memungkinkan Anda (atau Agen AI Anda) untuk mem-publish artikel secara massal (*bulk publish*) dari format Markdown (`.md`) ke Google Blogger, lengkap dengan dukungan *SEO*, upload gambar lokal otomatis, penjadwalan, dan sinkronisasi pintar!
 
-Sangat cocok digunakan sebagai penghubung (*bridge*) jika Anda memiliki AI yang dapat men-generate artikel markdown dan ingin secara otomatis mem-posting artikel tersebut ke blog Anda.
+Sangat cocok digunakan sebagai penghubung (*bridge*) jika Anda memiliki AI yang me-generate artikel dan ingin secara otomatis mem-postingnya ke blog Anda secara mandiri. Untuk integrasi AI, lihat [Panduan AI Agent (AGENT.md)](AGENT.md).
 
 ## ✨ Fitur Utama
-- **Bulk Upload**: Otomatis memindai dan mem-publish seluruh file markdown di dalam folder `articles/`.
-- **YAML Frontmatter Support**: Dukungan meta-data (Judul, Tanggal, Label) di dalam file `.md`.
-- **Smart Update & Deduplication**: Script otomatis menyisipkan `blogger_id` dan `updated_at` ke file lokal saat berhasil terbit. Jika file yang sama diubah (diedit) dan script dijalankan kembali, artikel di Blogger akan diperbarui (Mode Edit), bukan diduplikat!
-- **Scheduling**: Jika Anda mengatur `date` di *Frontmatter* pada tanggal masa depan, Blogger akan menjadwalkan publikasinya secara otomatis.
-- **Anti-Spam / Rate Limit Protection**: Terdapat jeda (*delay*) otomatis setiap kali memproses artikel untuk mencegah pemblokiran dari proteksi anti-spam Google API.
+- **NPM Global CLI**: Cukup ketik `blogger-publisher publish` dari mana saja!
+- **Auto Image Upload**: Menggunakan Google Drive API untuk meng-upload gambar lokal (contoh: `![alt](../images/foto.png)`) dan menyisipkan URL publiknya sebelum tayang.
+- **Advanced SEO & Custom Slug**: Atur Meta Description dan permalink (URL) khusus yang tidak harus sama dengan judul artikel.
+- **Smart Hashing (Anti Duplikasi)**: Script sangat hemat kuota API. Ia tidak akan melakukan pembaruan jika isi teks `.md` tidak mengalami perubahan.
+- **Scheduling**: Atur tanggal `date` di masa depan untuk menjadwalkan penayangan (Blogger akan merilisnya secara otomatis).
 
 ## 🚀 Instalasi
 
@@ -22,44 +22,47 @@ Sangat cocok digunakan sebagai penghubung (*bridge*) jika Anda memiliki AI yang 
    ```bash
    npm install
    ```
-3. Copy file `.env.example` menjadi `.env`:
+3. Jadikan sebagai CLI Global:
+   ```bash
+   npm link
+   ```
+4. Copy konfigurasi `.env`:
    ```bash
    cp .env.example .env
    ```
 
-## ⚙️ Persiapan Google Cloud (Kredensial API)
+## ⚙️ Persiapan Google Cloud (Kredensial)
 1. Buka [Google Cloud Console](https://console.cloud.google.com/).
-2. Buat Project baru dan aktifkan **Blogger API v3**.
-3. Buat Kredensial baru -> **OAuth 2.0 Client IDs**.
-4. Pilih Tipe Aplikasi: **Web application**.
-5. Tambahkan `http://localhost:3030/oauth2callback` di bagian **Authorized redirect URIs**.
-6. Simpan dan copy **Client ID** serta **Client Secret** Anda ke dalam file `.env`.
-7. Dapatkan juga **Blog ID** Anda (dari dashboard Blogger Anda) dan masukkan ke `.env`.
+2. Buat Project baru dan aktifkan **Blogger API v3** DAN **Google Drive API**.
+3. Buat Kredensial baru -> **OAuth 2.0 Client IDs** (Tipe: Web application).
+4. Tambahkan `http://localhost:3030/oauth2callback` di bagian **Authorized redirect URIs**.
+5. Simpan dan salin **Client ID** serta **Client Secret** Anda ke `.env`. Masukkan juga **Blog ID** Anda (dari URL dashboard Blogger Anda).
 
-## 🔑 Mendapatkan Refresh Token
-Untuk membuat otomatisasi berjalan selamanya tanpa perlu otorisasi ulang, jalankan:
+## 🔑 Autentikasi CLI
+Untuk membuat alat ini berjalan selamanya, lakukan otorisasi:
 ```bash
-node get-token.js
+blogger-publisher auth
 ```
-Klik tautan yang muncul, login dengan akun Google Anda, dan *copy* **Refresh Token** yang muncul di layar. Tempel (paste) kode tersebut di file `.env`.
+Klik tautan yang muncul di terminal, beri izin akses ke Blogger dan Drive, lalu salin **Refresh Token** yang didapat ke dalam file `.env`.
 
 ## 📖 Cara Menggunakan
+Buat file Markdown (`.md`) di dalam folder `articles/` dengan format *Frontmatter* di bagian paling atas:
+```yaml
+---
+title: "Artikel Buatan AI (Menarik)"
+slug: "url-keren-banget" 
+description: "Meta deskripsi SEO..."
+labels: ["AI", "Tech"]
+date: "2026-08-20T08:00:00Z" 
+---
+Isi artikel markdown di sini...
+```
 
-1. Buat atau taruh file Markdown `.md` Anda di dalam folder `articles/`.
-2. Pastikan file Anda menggunakan **Frontmatter** seperti ini:
-   ```yaml
-   ---
-   title: "Artikel Buatan AI"
-   date: "2026-08-20T08:00:00+07:00" 
-   labels: ["AI", "Tech"]
-   ---
-   Mulai menulis isi artikel Anda di sini...
-   ```
-3. Jalankan perintah publikasi:
-   ```bash
-   node publisher.js
-   ```
-4. Script akan memproses semua artikel dan jika sukses, file Anda akan diperbarui dengan data `blogger_id` dan `updated_at`.
+Jalankan publikasi massal:
+```bash
+blogger-publisher publish
+```
+*(Anda juga bisa mem-publish folder lain dengan `blogger-publisher publish ./path-lain/`)*
 
 ## 📜 Lisensi
-Project ini dilisensikan di bawah lisensi MIT - lihat file [LICENSE](LICENSE) untuk detailnya.
+Project ini dilisensikan di bawah lisensi MIT - lihat file [LICENSE](LICENSE).
