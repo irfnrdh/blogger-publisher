@@ -19,7 +19,7 @@ Ketika pengguna meminta Anda untuk menjalankan `autoblogging` atau meminta Anda 
    labels: ["[Kategori Utama]", "[Sub-kategori]"]
    ---
    ```
-   *(Catatan: Jika User meminta penjadwalan, tambahkan `date: "YYYY-MM-DDThh:mm:ssZ"`. Jika diminta draft, tambahkan `status: "draft"`)*.
+   *(Catatan: Jika User meminta penjadwalan, tambahkan `date: "YYYY-MM-DDThh:mm:ssZ"`. Jika diminta untuk blog tertentu, tambahkan `blog_id: "ID"`. Jika diminta draft atau hapus, tambahkan `status: "draft"` atau `"deleted"`)*.
 3. **Simpan File:** Gunakan tool `write_to_file` untuk menyimpan artikel tersebut ke dalam folder `./articles/` dengan nama file yang representatif (contoh: `./articles/topik-anda.md`).
 4. **Eksekusi:** Gunakan tool `run_command` untuk menjalankan perintah:
    ```bash

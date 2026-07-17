@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0] - 2026-07-18
+
+### Added
+- **Multi-CDN Image Uploads**: Arsitektur modular di `lib/uploaders` yang mendukung `drive`, `imgbb`, `cloudinary`, dan `github`. Kini bebas limit *bandwidth*!
+- **Fitur Pull (2-Way Sync)**: Command baru `blogger-publisher pull` untuk menyedot (download) artikel lama dari Blogger dan mengonversinya menjadi Markdown menggunakan `turndown`.
+- **Multi-Blog / Multi-Niche Support**: Tambahan flag `--blog <id>` dan meta `blog_id` pada Frontmatter untuk mem-publish ke blog yang berbeda dari satu script yang sama.
+- **Fitur Delete & Revert**: Penggunaan meta `status: "deleted"` untuk menghapus postingan secara permanen dari server Google, dan `status: "draft"` untuk me-revert postingan yang sudah tayang kembali ke draft.
+
+### Changed
+- Pemisahan logika upload gambar ke modul terpisah (`lib/uploader.js`).
+- Migrasi *dependencies* dengan penambahan `turndown`, `axios`, dan `cloudinary`.
+
 ## [1.1.0] - 2026-07-17
 
 ### Added

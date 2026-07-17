@@ -7,22 +7,28 @@ Ini adalah `blogger-publisher`, sebuah *Command Line Tool* berbasis Node.js yang
 
 ## 2. Kemampuan Utama (Core Features)
 1. **Smart Sync (Hashing):** Script tidak akan me-republish artikel jika isinya tidak ada yang diubah (berdasarkan `content_hash`).
-2. **Auto Image Upload:** Script mencari gambar lokal (misal: `![alt](../images/foto.png)`), meng-uploadnya ke Google Drive, dan mengganti teks Markdown-nya secara dinamis sebelum di-publish.
-3. **Custom Slug & SEO:** Mendukung *custom permalink* dan *meta search description*.
-4. **Scheduling:** Mendukung publikasi terjadwal berdasarkan parameter `date`.
+2. **Multi-CDN Image Upload:** Mampu mengunggah gambar Markdown lokal secara otomatis ke Google Drive, ImgBB, Cloudinary, atau GitHub (berdasarkan pengaturan di file `.env`).
+3. **Advanced SEO:** Mendukung *custom permalink* dan *meta search description*.
+4. **2-Way Sync (Pull & Publish):** Anda bisa men-download semua artikel dari Blogger menjadi Markdown (`blogger-publisher pull`), atau mengirimnya kembali.
+5. **Multi-Blog Support:** Dapat me-manage ratusan blog berbeda dalam 1 repo. Cukup selipkan `blog_id` pada Frontmatter.
 
 ## 3. Aturan Membuat File Markdown (Frontmatter)
-Setiap kali Anda (AI Agent) diminta untuk membuat artikel baru (misal: mengambil data berita terkini dan menjadikannya postingan blog), **Anda WAJIB mengikuti format YAML Frontmatter ini di baris pertama file `.md`:**
+Setiap kali Anda (AI Agent) diminta untuk membuat artikel baru, **Anda WAJIB mengikuti format YAML Frontmatter ini di baris pertama file `.md`:**
 
 ```yaml
 ---
 title: "[Wajib] Judul Artikel Menarik"
 slug: "[Opsional] url-ramah-seo"
-description: "[Opsional] Ringkasan singkat meta description untuk Google (Maks 150 huruf)"
+description: "[Opsional] Ringkasan singkat meta description untuk Google"
 labels: ["[Opsional]", "Kategori 1", "Berita"]
-status: "[Opsional] Isi 'draft' jika belum mau dipublish"
+blog_id: "[Opsional] Isi dengan ID Blogger spesifik jika User punya banyak blog"
+status: "[Opsional] Isi 'draft' untuk menyembunyikan, atau 'deleted' untuk menghapus"
 date: "[Opsional] Format ISO-8601, contoh: 2026-07-25T10:00:00Z untuk penjadwalan"
 ---
+```
+
+### Aturan Khusus Penghapusan (DELETE):
+Jika User memerintahkan Anda untuk menghapus suatu artikel, **JANGAN** menghapus file `.md`-nya! Cukup ubah Frontmatter artikel tersebut menjadi `status: "deleted"`, lalu jalankan `blogger-publisher publish`. Script akan otomatis menghapusnya dari server Google lalu membuang file lokalnya ke tong sampah.
 
 # Konten Artikel
 Isi artikel dimulai di sini...
