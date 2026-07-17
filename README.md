@@ -20,7 +20,7 @@ Sangat cocok digunakan sebagai penghubung (*bridge*) jika Anda memiliki AI yang 
 
 1. Clone repository ini:
    ```bash
-   git clone https://github.com/username-anda/blogger-publisher.git
+   git clone https://github.com/irfnrdh/blogger-publisher.git
    cd blogger-publisher
    ```
 2. Install dependencies:
