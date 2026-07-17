@@ -28,7 +28,7 @@ program
   .argument('[target]', 'Folder atau file target (default: ./articles)', './articles')
   .option('-b, --blog <id>', 'Spesifikasikan Blog ID (Override .env)')
   .action(async (target, options) => {
-    const targetPath = path.resolve(process.cwd(), target);
+    const targetPath = target === '-' ? '-' : path.resolve(process.cwd(), target);
     await runBulkPublisher(targetPath, options.blog);
   });
 
