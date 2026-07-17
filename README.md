@@ -9,6 +9,32 @@ Sebuah *tool automation* open-source berbasis Node.js yang memungkinkan Anda (at
 
 Sangat cocok digunakan sebagai penghubung (*bridge*) jika Anda memiliki AI yang me-generate artikel dan ingin secara otomatis mem-postingnya ke blog Anda secara mandiri. Untuk integrasi AI, lihat [Panduan AI Agent (AGENT.md)](AGENT.md).
 
+## 🚀 Quick Start (Interactive Mode)
+
+Cara paling mudah dan modern untuk memulai proyek autoblog Anda adalah menggunakan **Interactive TUI**:
+
+```bash
+# Buat folder kosong untuk proyek blog Anda
+mkdir my-blog && cd my-blog
+
+# Jalankan Blogger Publisher dalam mode interaktif
+npx blogger-publisher
+# ATAU jika sudah di-install global:
+blogger-publisher
+```
+
+**Sistem akan menampilkan menu interaktif:**
+- **🏗️ Init Workspace**: Otomatis memandu Anda mengisi kredensial (`.env`), membuat kerangka folder (`articles/`, `images/`), menulis contoh Markdown perdana, dan memasukkan Instruksi Agen AI (`AGENT.md`).
+- **🔑 Auth**: Login OAuth ke Google dengan 1x klik.
+- **🚀 Publish**: Mendorong semua artikel Anda ke awan.
+- **📥 Pull**: Menyedot artikel lama Anda ke lokal.
+
+---
+
+## 🛠️ Penggunaan Lanjut (Manual/CI/CD)
+
+Untuk Anda yang ingin menggunakan *Cron Job*, GitHub Actions, atau skrip otomatis, Anda tetap bisa melewati menu interaktif dengan menggunakan argumen bawaan:
+
 ## ✨ Fitur Utama
 - **NPM Global CLI**: Cukup ketik `blogger-publisher publish` dari mana saja!
 - **Multi-CDN Image Upload**: Mengubah gambar lokal secara otomatis menjadi tautan publik. Anda bebas memilih provider **Google Drive** (Default), **ImgBB**, **Cloudinary**, atau **GitHub** untuk menahan trafik jutaan pengunjung!

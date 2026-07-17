@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.0] - 2026-07-18
+
+### Added
+- **Interactive TUI**: Developer Experience (DX) kelas atas menggunakan `@clack/prompts` dan `picocolors`.
+- **Project Scaffolding**: Menjalankan `blogger-publisher` (tanpa argumen) sekarang meluncurkan menu interaktif. Menu "Init Workspace" akan memandu pengguna membuat `.env`, `.gitignore`, kerangka folder `articles/` dan `images/`, membuat artikel Markdown sampel perdana, serta menginjeksi `AGENT.md` secara otomatis ke dalam ruang kerja.
+
+### Changed
+- **CLI Default Action**: Menjalankan `blogger-publisher` tanpa perintah spesifik kini meluncurkan TUI alih-alih menampilkan menu *help* bawaan.
+
 ## [1.2.0] - 2026-07-18
 
 ### Added
