@@ -4,6 +4,7 @@ const { program } = require('commander');
 const { runAuthFlow } = require('../lib/auth');
 const { runBulkPublisher } = require('../lib/publisher');
 const { runPuller } = require('../lib/pull');
+const { runInteractiveTui } = require('../lib/tui');
 const path = require('path');
 const pkg = require('../package.json');
 
@@ -39,4 +40,12 @@ program
     await runPuller(targetPath, options.blog);
   });
 
-program.parse(process.argv);
+// If no command is provided, run the interactive TUI
+if (!process.argv.slice(2).length) {
+  runInteractiveTui().catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
+} else {
+  program.parse(process.argv);
+}
