@@ -3,6 +3,7 @@
 const { program } = require('commander');
 const { runAuthFlow } = require('../lib/auth');
 const { runBulkPublisher } = require('../lib/publisher');
+const { runPuller } = require('../lib/pull');
 const path = require('path');
 const pkg = require('../package.json');
 
@@ -22,9 +23,20 @@ program
   .command('publish')
   .description('Mem-publish semua file markdown di folder target ke Blogger')
   .argument('[target]', 'Folder atau file target (default: ./articles)', './articles')
-  .action(async (target) => {
+  .option('-b, --blog <id>', 'Spesifikasikan Blog ID (Override .env)')
+  .action(async (target, options) => {
     const targetPath = path.resolve(process.cwd(), target);
-    await runBulkPublisher(targetPath);
+    await runBulkPublisher(targetPath, options.blog);
+  });
+
+program
+  .command('pull')
+  .description('Men-download (Sync) semua artikel dari Blogger menjadi file Markdown')
+  .argument('[target]', 'Folder target untuk menyimpan Markdown (default: ./articles)', './articles')
+  .option('-b, --blog <id>', 'Spesifikasikan Blog ID (Override .env)')
+  .action(async (target, options) => {
+    const targetPath = path.resolve(process.cwd(), target);
+    await runPuller(targetPath, options.blog);
   });
 
 program.parse(process.argv);
