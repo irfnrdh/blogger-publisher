@@ -7,6 +7,14 @@
     "url": "git+https://github.com/irfnrdh/blogger-publisher.git"
   },
   "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./core": "./lib/sdk/core.js",
+    "./auth": "./lib/auth.js",
+    "./config": "./lib/config.js",
+    "./uploader": "./lib/uploader.js",
+    "./mcp": "./lib/mcp/server.js"
+  },
   "bin": {
     "blogger-publisher": "bin/cli.js",
     "mcp-blogger-server": "bin/mcp-server.js"
