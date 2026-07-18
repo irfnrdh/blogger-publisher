@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.4] - 2026-07-18
+
+### Fixed
+- **SECURITY (Secrets Leak)**: Corrected `.npmignore` to properly exclude `.env` and `*.json` credentials from being packaged into NPM tarballs. (Version `1.3.3` was deprecated due to this issue).
+
 ## [1.3.3] - 2026-07-18
 
 ### Added

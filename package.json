@@ -1,6 +1,6 @@
 {
   "name": "blogger-publisher",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "description": "A powerful CLI to automate your Blogger publishing using Markdown, Multi-CDN, and AI Agents.",
   "repository": {
     "type": "git",
