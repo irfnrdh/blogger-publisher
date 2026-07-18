@@ -10,26 +10,23 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      packages: write
+      id-token: write # Wajib untuk otentikasi NPM Provenance (OIDC)
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Install Dependencies
-        run: npm ci
-
-      - name: Setup Node.js for GitHub Packages
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '24.x'
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@irfnrdh'
+          registry-url: 'https://registry.npmjs.org'
 
-      - name: Modify Package Name for GitHub Packages
-        run: |
-          sed -i 's/"name": "blogger-publisher"/"name": "@irfnrdh\/blogger-publisher"/g' package.json
+      - name: Install Dependencies
+        run: npm ci
 
-      - name: Publish to GitHub Packages
-        run: npm publish
+      - name: Publish to NPM with Provenance
+        run: npm publish --provenance
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # NODE_AUTH_TOKEN usually provided by NPM_TOKEN secret, 
+          # but OIDC handles this automatically if publisher is trusted!
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
