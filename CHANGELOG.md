@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.3] - 2026-07-18
+
+### Added
+- **Official Obsidian Plugin (`obsidian-blogger-publisher`)**: Native Obsidian integration for 1-click publishing directly from your vault! Includes Ribbon Icon, Command Palette support, Settings Tab, and `child_process` execution.
+- **Obsidian Setup Guide**: Added `docs/OBSIDIAN.md` with instructions for Shell Commands integration and a ready-to-use Frontmatter template.
+
+### Fixed
+- **SECURITY (Path Traversal)**: Fixed a medium-risk vulnerability in `lib/publisher.js` where malicious markdown files could exfiltrate sensitive files outside the current working directory during image uploads.
+- **SECURITY (Supply Chain Risk)**: Removed automatic `execSync('npm install...')` from the auto-updater to mitigate potential supply chain attacks. The updater now only notifies users via console logs.
+- **Command Injection**: Fixed a command injection vulnerability in the Obsidian plugin by replacing `child_process.exec` with the safer `child_process.execFile`.
+- **Bulk Publisher Reliability**: Wrapped `fs.unlinkSync` and `fs.readFileSync` with `try...catch` in the core publisher logic to prevent the entire batch process from crashing when encountering locked or unreadable files.
+- **MCP Server Stability**: Fixed Unhandled Promise Rejections in the MCP Server (`read_resource` and `get_prompt`) by properly wrapping them in `try...catch`.
+- **Image URL Parsing**: `decodeURIComponent()` is now applied to local image paths, correctly handling files with spaces (e.g. `image%20name.png`). Uploads for Base64 Data URIs (`data:image/...`) are correctly bypassed.
+- **Frontmatter Regex**: Improved regex patterns (using multiline start anchors) to safely update `updated_at` and `content_hash` without corrupting other markdown elements.
+- **CLI Error Handling**: Improved error parsing with Optional Chaining (`?.`) to prevent crashes during unknown Axios error responses.
+
 ## [1.3.2] - 2026-07-18
 
 ### Added
