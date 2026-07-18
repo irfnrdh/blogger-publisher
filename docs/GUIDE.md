@@ -1,38 +1,36 @@
 # 📚 Panduan Lengkap Penggunaan (Guide)
 
-Selamat datang di pusat dokumentasi resmi **Blogger Publisher CLI** `v1.3.2`. Dokumen ini dirancang untuk mengajarkan Anda dari pemula hingga menjadi *Master Autoblogger*.
+Selamat datang di pusat dokumentasi resmi **Blogger Publisher CLI** `v1.3.4+` (Pro Foundation). Dokumen ini dirancang untuk mengajarkan Anda dari pemula hingga menjadi *Master Autoblogger* dengan dukungan **Multi-Account** dan **Local API Server**.
 
 ---
 
 ## 1. Cara Tercepat: Interactive TUI (Rekomendasi)
 
-Cara paling mudah untuk memulai. Cukup buat folder kosong dan jalankan:
+Cara paling mudah untuk memulai. Cukup buka terminal dan jalankan:
 
 ```bash
-mkdir my-blog && cd my-blog
 blogger-publisher
 ```
 
-Sistem akan memunculkan menu interaktif berwarna. Pilih **🏗️ Init Workspace** dan ikuti panduan langkah demi langkah untuk:
-1. Mengisi kredensial Google (CLIENT_ID, CLIENT_SECRET, BLOG_ID)
-2. Memilih Image CDN (Drive, ImgBB, Cloudinary, GitHub)
-3. Membuat kerangka folder (`articles/`, `images/`) otomatis
-4. Menyiapkan contoh artikel Markdown perdana
+Sistem akan memunculkan menu interaktif berwarna layaknya Vercel CLI. 
+1. Pilih **🔑 Auth** untuk login ke akun Google.
+2. Anda akan diminta memasukkan nama unik untuk akun Anda (contoh: `klien-seo`).
+3. Browser akan terbuka. Login, berikan akses, dan token akan tersimpan otomatis dan aman di `~/.blogger-publisher/accounts/klien-seo/`.
+4. Anda bisa mengulangi langkah ini berkali-kali untuk 100+ akun Google yang berbeda!
 
-Kredensial tersimpan secara aman di **Global Config** (`~/.blogger-publisher/config.json`) — berlaku di semua folder di komputer Anda.
+Saat Anda memilih menu **🚀 Publish**, TUI akan menampilkan **dropdown** akun dan blog tujuan Anda. Sangat praktis!
 
 ---
 
-## 2. Setup Manual (Lanjutan)
+## 2. API Server & Background Scheduler (Pro Mode)
 
-Jika ingin mengatur kredensial secara manual:
+Jika Anda ingin membuat Dashboard Web sendiri, atau menggunakan skrip otomatisasi yang kompleks, hidupkan *engine* API lokal:
 
-1. Buka [Google Cloud Console](https://console.cloud.google.com/)
-2. Buat *Project* baru dan aktifkan **Blogger API** & **Google Drive API**
-3. Masuk ke *Credentials* > Buat **OAuth client ID** (tipe *Desktop app*)
-4. Catat `CLIENT_ID` dan `CLIENT_SECRET` Anda
-5. Jalankan `blogger-publisher` → pilih **Init Workspace** → masukkan kredensial
-6. Pilih menu **🔑 Auth** → browser akan terbuka → login Google → Refresh Token tersimpan otomatis
+```bash
+blogger-publisher serve --port 1826
+```
+
+Saat server berjalan, Anda mendapatkan akses ke REST API dan **Server-Sent Events (SSE)** untuk memantau progress *upload* secara *real-time*. Server ini juga menangani penjadwalan (Cron) artikel di latar belakang.
 
 ---
 
@@ -78,15 +76,10 @@ Jika sudah dikonfigurasi, Anda bisa melewati menu interaktif:
 | Perintah | Fungsi |
 |---|---|
 | `blogger-publisher` | Buka menu TUI interaktif |
-| `blogger-publisher auth` | Login OAuth ke Google |
-| `blogger-publisher publish [folder]` | Publish semua artikel di folder |
-| `blogger-publisher publish -` | Publish dari STDIN (piping) |
-| `blogger-publisher pull [folder]` | Download artikel dari Blogger ke Markdown |
-
-**Contoh STDIN Pipeline:**
-```bash
-echo "---\ntitle: 'Halo'\nstatus: 'draft'\n---\nIsi artikel" | blogger-publisher publish -
-```
+| `blogger-publisher auth <nama-akun>` | Login OAuth ke Google dengan identitas spesifik |
+| `blogger-publisher serve --port 1826` | Jalankan API Server & Scheduler di port tertentu |
+| `blogger-publisher publish [folder] -a <akun>` | Publish semua artikel menggunakan kredensial akun tertentu |
+| `blogger-publisher pull [folder] -a <akun>` | Download artikel dari Blogger jadi file Markdown |
 
 ---
 
@@ -123,20 +116,14 @@ Restart AI client, lalu cukup ucapkan:
 - *"Publish post ID 12345 di blog ID 67890"*
 - *"Tampilkan semua komentar pending dan setujui yang sopan"*
 
-**Tools yang tersedia:**
-- 📰 **Blogs (4)**: `list_blogs`, `get_blog`, `get_blog_by_url`, `get_blog_info`
-- 📝 **Posts (9)**: `list_posts`, `get_post`, `search_posts`, `create_post`, `update_post`, `publish_post`, `revert_post`, `delete_post`, `get_post_by_path`
-- 📄 **Pages (6)**: `list_pages`, `get_page`, `create_page`, `update_page`, `publish_page`, `delete_page`
-- 💬 **Comments (6)**: `list_comments`, `list_all_comments`, `get_comment`, `approve_comment`, `mark_comment_spam`, `delete_comment`
-
 ---
 
 ## 8. Auto Updater
 
-Setiap kali `blogger-publisher` dijalankan, sistem diam-diam mengecek versi terbaru dari NPM. Jika ada versi baru, Anda akan ditanya:
+Setiap kali `blogger-publisher` dijalankan secara interaktif, sistem diam-diam mengecek versi terbaru dari NPM. Jika ada versi baru, Anda akan ditanya:
 
 ```text
-✨ Update Tersedia! v1.3.2 → v1.4.0
+✨ Update Tersedia! v1.3.4 → v1.4.0
 ? Apakah Anda ingin memperbarui otomatis sekarang? (Y/n)
 ```
 

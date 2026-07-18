@@ -1,88 +1,90 @@
 <div align="right">🌐 <a href="#english-version">English version below</a></div>
 
-# blogger-publisher
+# blogger-publisher (v1.3.4+)
 
-**CLI + MCP Server lengkap untuk mengelola blog Blogger.com via Markdown & AI.**
+**Mesin Publikasi Multi-Akun & API Server Lokal untuk Blogger.com (Markdown & AI Native).**
 
 [![npm version](https://img.shields.io/npm/v/blogger-publisher)](https://www.npmjs.com/package/blogger-publisher)
 [![npm downloads](https://img.shields.io/npm/dm/blogger-publisher)](https://www.npmjs.com/package/blogger-publisher)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Sebuah *developer-first* CLI tool untuk mengelola, mensinkronkan, dan mempublikasikan artikel Markdown ke Google Blogger secara otomatis. Sangat cocok sebagai jembatan antara AI yang menghasilkan konten dengan blog Blogger Anda.
-
-Untuk panduan AI Agent, lihat [AGENT.md](AGENT.md).
+Sebuah *developer-first* ekosistem (CLI + API Server + MCP) untuk mengelola, mensinkronkan, dan mempublikasikan artikel Markdown ke Google Blogger secara otomatis. Dirancang dengan kapabilitas Multi-Akun (Pro) yang sangat cocok untuk *agency*, SaaS, maupun integrasi AI (seperti Obsidian Vault).
 
 ---
 
-## 🤖 MCP Server (25 Tools — AI-Native)
+## 🌟 Fitur Unggulan Baru (Pro Foundation)
 
-`blogger-publisher` kini hadir dengan **MCP Server bawaan**. Daftarkan di AI client Anda dan kelola seluruh blog via percakapan natural — tanpa menyentuh terminal.
-
-**Setelah install, daftarkan di MCP config:**
-```json
-{
-  "mcpServers": {
-    "blogger": {
-      "command": "mcp-blogger-server"
-    }
-  }
-}
-```
-
-**Tools tersedia:**
-- 📰 **Blogs (4):** `list_blogs`, `get_blog`, `get_blog_by_url`, `get_blog_info`
-- 📝 **Posts (9):** `list_posts`, `get_post`, `search_posts`, `create_post`, `update_post`, `publish_post`, `revert_post`, `delete_post`, `get_post_by_path`
-- 📄 **Pages (6):** `list_pages`, `get_page`, `create_page`, `update_page`, `publish_page`, `delete_page`
-- 💬 **Comments (6):** `list_comments`, `list_all_comments`, `get_comment`, `approve_comment`, `mark_comment_spam`, `delete_comment`
+- 👥 **Multi-Account Native:** Kelola 100+ akun Google dan Blog berbeda dari satu terminal. Tidak ada lagi konflik `REFRESH_TOKEN` di `.env`.
+- 🔌 **Local API Server (Port 1826):** *Headless mode* dengan REST API dan *Server-Sent Events* (SSE) untuk *real-time publish streaming*. Sangat mudah diintegrasikan dengan Next.js / React Dashboard Anda sendiri!
+- ⏰ **Built-in Background Scheduler:** Jadwalkan publikasi artikel (Cron-style) yang akan dijalankan di latar belakang oleh mesin server.
+- 🛡️ **Enterprise Security:** Mencegah celah *Path Traversal*, *Timing Attacks*, dan mengamankan XSS secara *out-of-the-box*.
+- 🤖 **MCP Server (25 Tools):** Kontrol penuh blog Anda menggunakan prompt AI (Natural Language).
 
 ---
 
-## 🚀 Quick Start (Interactive Mode)
+## 🚀 Quick Start (Interactive TUI)
+
+Tinggalkan cara lama. Gunakan Terminal UI (TUI) interaktif kami yang sudah secanggih Vercel CLI.
 
 ```bash
 npm install -g blogger-publisher
-mkdir my-blog && cd my-blog
 blogger-publisher
 ```
+- TUI akan memandu Anda untuk **Setup Workspace**.
+- TUI akan meminta Anda **Login Akun Google (Multi-Account)** secara elegan.
+- Saat Anda memilih menu **Publish**, Anda tinggal memilih Akun & Blog dari sebuah dropdown interaktif!
 
-Menu interaktif akan memandu Anda melalui setup lengkap: kredensial Google, pilihan CDN, dan scaffolding folder.
+---
 
-## 📋 Perintah CLI
+## 💻 CLI Commands (Power User)
 
-| Perintah | Fungsi |
+Bagi Anda yang menyukai skrip otomatis (*cron/bash*), CLI ini mendukung kontrol mutlak:
+
+| Perintah | Deskripsi |
 |---|---|
-| `blogger-publisher` | Menu interaktif TUI |
-| `blogger-publisher auth` | Login OAuth ke Google |
-| `blogger-publisher publish [folder]` | Publish semua artikel di folder |
-| `blogger-publisher publish -` | Publish dari STDIN (pipe) |
-| `blogger-publisher pull [folder]` | Download artikel dari Blogger |
+| `blogger-publisher` | Buka TUI Interaktif (Smart Mode) |
+| `blogger-publisher auth <nama-akun>` | Login OAuth untuk akun tertentu (misal: `auth client-a`) |
+| `blogger-publisher serve` | Menjalankan **Local API Server** di Port `1826` |
+| `blogger-publisher publish [folder] -a <akun>` | Publish artikel ke akun tertentu |
+| `blogger-publisher pull [folder] -a <akun>` | Tarik (Sync) artikel dari Blogger jadi Markdown |
 
-## 📁 Frontmatter Artikel
+---
+
+## 🔌 API Server Lokal
+
+Menyiapkan Dashboard SaaS atau UI Web kustom? Hidupkan *engine* API lokal:
+
+```bash
+blogger-publisher serve
+```
+**API Endpoints (Membutuhkan `X-API-Key` yang tersimpan di `~/.blogger-publisher/api.key`):**
+- `GET /api/accounts` — Menampilkan semua akun yang terotorisasi.
+- `GET /api/accounts/:id/blogs` — Menarik daftar Blog dari sebuah akun.
+- `POST /api/publish` — Publikasi file/folder dengan streaming SSE (Real-Time UI).
+- `POST /api/schedules` — Daftarkan jadwal Cron.
+
+---
+
+## 📁 Frontmatter Artikel & Multi-CDN
+
+Simpan artikel di folder mana saja. Setiap file Markdown dilengkapi metadata untuk routing:
 
 ```yaml
 ---
-title: "Judul Artikel Anda"
+title: "Judul Artikel Pro Anda"
 slug: "url-kustom-seo"
 description: "Meta deskripsi untuk Google."
 labels: ["Teknologi", "AI"]
 status: "draft"
 date: "2026-08-01T08:00:00Z"
 ---
-Konten artikel...
 ```
 
-## 🖼️ Multi-CDN Images
-
-Tulis gambar dengan format Markdown biasa `![alt](./images/foto.png)` — saat publish, sistem otomatis mengunggahnya ke CDN pilihan Anda dan mengganti URL-nya.
-
-| CDN | Konfigurasi |
-|---|---|
-| Google Drive | Default, tanpa API key |
-| ImgBB | `IMGBB_API_KEY` |
-| Cloudinary | `CLOUDINARY_*` keys |
-| GitHub + jsDelivr | `GITHUB_TOKEN` + `GITHUB_REPO` |
-
----
+Tulis gambar secara lokal `![foto](./images/foto.png)`. Sistem akan mengunggah gambar tersebut secara otomatis ke salah satu CDN berikut dan mereplace URL-nya:
+- **Google Drive** (Default)
+- **ImgBB**
+- **Cloudinary**
+- **GitHub + jsDelivr**
 
 ---
 
@@ -90,104 +92,68 @@ Tulis gambar dengan format Markdown biasa `![alt](./images/foto.png)` — saat p
 
 # blogger-publisher — English
 
-**Full-featured CLI + MCP Server to manage your Blogger.com blog using Markdown & AI.**
+**Multi-Account Publishing Engine & Local API Server for Blogger.com (Markdown & AI Native).**
 
-A developer-first CLI tool to manage, sync, and publish Markdown articles to Google Blogger automatically. The perfect bridge between AI-generated content and your Blogger site. For AI Agent instructions, see [AGENT.md](AGENT.md).
-
----
-
-## 🤖 MCP Server (25 Tools — AI-Native)
-
-`blogger-publisher` ships with a **built-in MCP Server**. Register it in any MCP-compatible AI client (Antigravity, Claude Desktop, Cursor, Windsurf) and manage your entire blog through natural language — no terminal required.
-
-**Register in your MCP config:**
-```json
-{
-  "mcpServers": {
-    "blogger": {
-      "command": "mcp-blogger-server"
-    }
-  }
-}
-```
-
-> ⚡ No extra environment variables needed! The MCP Server automatically reads from the same Global Config as the CLI (`~/.blogger-publisher/config.json`).
-
-**Available Tools (25):**
-- 📰 **Blogs (4):** `list_blogs`, `get_blog`, `get_blog_by_url`, `get_blog_info`
-- 📝 **Posts (9):** `list_posts`, `get_post`, `search_posts`, `create_post`, `update_post`, `publish_post`, `revert_post`, `delete_post`, `get_post_by_path`
-- 📄 **Pages (6):** `list_pages`, `get_page`, `create_page`, `update_page`, `publish_page`, `delete_page`
-- 💬 **Comments (6):** `list_comments`, `list_all_comments`, `get_comment`, `approve_comment`, `mark_comment_spam`, `delete_comment`
-
-**Example natural language commands:**
-- *"List all my blogs"*
-- *"Create a new draft post titled 'Hello World' on my blog"*
-- *"Show all pending comments and approve the genuine ones"*
-- *"Revert post ID 1234 back to draft"*
+A developer-first ecosystem (CLI + API Server + MCP) to manage, sync, and publish Markdown articles to Google Blogger automatically. Designed with robust Multi-Account capabilities (Pro Foundation) suitable for agencies, custom SaaS dashboards, or AI vaults (like Obsidian).
 
 ---
 
-## 🚀 Quick Start (Interactive Mode)
+## 🌟 New Key Features (Pro Foundation)
+
+- 👥 **Native Multi-Account:** Manage 100+ Google Accounts and Blogs from a single machine. No more `.env` file token conflicts!
+- 🔌 **Local API Server (Port 1826):** Run in headless mode! Exposes a REST API with Server-Sent Events (SSE) for real-time progress. Perfect for connecting your own Next.js / React Dashboards.
+- ⏰ **Built-in Scheduler:** Schedule your posts in the background seamlessly.
+- 🛡️ **Enterprise Security:** Hardened against Path Traversal, Timing Attacks, and Symlink bypasses.
+- 🤖 **MCP Server (25 Tools):** Manage your entire blog through natural language in any AI client (Antigravity, Cursor, etc.).
+
+---
+
+## 🚀 Quick Start (Interactive TUI)
+
+Say goodbye to manual configs. Use our smart interactive Terminal UI (TUI) that feels like Vercel CLI.
 
 ```bash
 npm install -g blogger-publisher
-mkdir my-blog && cd my-blog
 blogger-publisher
 ```
+- It will guide you to **Setup Workspace**.
+- It provides a seamless **OAuth Login** for any named account.
+- When you click **Publish**, you select the Target Account and Blog from a sleek dropdown menu!
 
-The interactive TUI will guide you through the full setup: Google credentials, CDN choice, and folder scaffolding. Credentials are stored globally in `~/.blogger-publisher/config.json` — works from any folder on your machine.
+---
 
-## 📋 CLI Commands
+## 💻 CLI Commands (Power User)
+
+For those who love writing bash scripts or cron jobs:
 
 | Command | Description |
 |---|---|
-| `blogger-publisher` | Open interactive TUI menu |
-| `blogger-publisher auth` | Authenticate with Google OAuth |
-| `blogger-publisher publish [folder]` | Publish all articles in a folder |
-| `blogger-publisher publish -` | Publish from STDIN (pipe mode) |
-| `blogger-publisher pull [folder]` | Download Blogger posts as Markdown |
+| `blogger-publisher` | Open interactive TUI (Smart Mode) |
+| `blogger-publisher auth <account-name>` | OAuth Login for a specific account identity |
+| `blogger-publisher serve` | Spin up the **Local API Server** & Scheduler on Port `1826` |
+| `blogger-publisher publish [folder] -a <account>` | Publish articles using a specific account |
+| `blogger-publisher pull [folder] -a <account>` | Sync Blogger posts down as Markdown |
 
-## 📁 Article Frontmatter
+---
 
-```yaml
----
-title: "Your Article Title"
-slug: "custom-seo-url"
-description: "Meta description for Google Search."
-labels: ["Technology", "AI"]
-status: "draft"        # or 'published' or 'deleted'
-date: "2026-08-01T08:00:00Z"
----
-Article content here...
+## 🔌 Local API Server
+
+Building a SaaS Dashboard or Custom UI? Spin up the API engine:
+
+```bash
+blogger-publisher serve
 ```
+**API Endpoints (Requires `X-API-Key` stored at `~/.blogger-publisher/api.key`):**
+- `GET /api/accounts` — List all authorized accounts.
+- `GET /api/accounts/:id/blogs` — Fetch all Blogger properties for an account.
+- `POST /api/publish` — Publish a file/folder with SSE Streaming (perfect for real-time UI bars).
+- `POST /api/schedules` — Register a Cron schedule.
 
-## 🖼️ Multi-CDN Image Routing
-
-Write images normally: `![alt](./images/photo.png)` — on publish, the system auto-uploads them to your chosen CDN and replaces the URL permanently in the Markdown file.
-
-| CDN | Config Needed |
-|---|---|
-| Google Drive | Default, no API key |
-| ImgBB | `IMGBB_API_KEY` |
-| Cloudinary | `CLOUDINARY_*` keys |
-| GitHub + jsDelivr | `GITHUB_TOKEN` + `GITHUB_REPO` |
-
-## ✨ Key Features
-
-- 🤖 **MCP Server** — 25 tools for AI-native blog management
-- 🏗️ **Interactive TUI** — Zero-config setup with guided menus
-- 🌐 **Global Config** — Set up once, use from any directory
-- 🔄 **2-Way Sync** — Pull from Blogger, edit locally, push back
-- 🛡️ **Zod Validation** — Strict frontmatter validation with clear errors
-- 🕵️ **Magic Bytes Detection** — Secure image type detection
-- ⚡ **Smart Hashing** — Skip unchanged articles, save API quota
-- 🔄 **Auto Updater** — Notified of new versions on every run
-- 🚰 **Stdin Pipeline** — `cat article.md | blogger-publisher publish -`
+---
 
 ## 📚 Documentation
 
 - [Full Guide](docs/GUIDE.md)
-- [Case Studies](docs/CASE_STUDIES.md)
 - [AI Agent Instructions](AGENT.md)
 - [Contributing](CONTRIBUTING.md)
 - [Changelog](CHANGELOG.md)

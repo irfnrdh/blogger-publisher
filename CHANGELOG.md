@@ -4,8 +4,21 @@ All notable changes to this project will be documented in this file.
 
 ## [1.3.4] - 2026-07-18
 
+### Added
+- **Multi-Account Native (Pro Foundation)**: Arsitektur inti kini mendukung multi-akun Google tanpa konflik. Semua kredensial disimpan rapi per-akun di `~/.blogger-publisher/accounts/`.
+- **Local API Server (Port 1826)**: Menambahkan *headless mode* dengan REST API dan Server-Sent Events (SSE) via `blogger-publisher serve`. Sangat ideal untuk integrasi dengan SaaS Dashboard kustom (Next.js/React).
+- **Background Scheduler**: Mesin Cron internal (*built-in*) pada Local API Server untuk menjadwalkan publikasi artikel di latar belakang.
+- **Unified Smart TUI**: Terminal UI dirombak total. Kini mendukung flow login multi-akun dan *dropdown* interaktif untuk memilih akun dan blog target secara elegan, layaknya Vercel CLI.
+- **New CLI Flags**: Menambahkan opsi `--account <id>` atau `-a <id>` pada command `publish` dan `pull` untuk eksekusi non-interaktif (*power users/cron jobs*).
+
+### Changed
+- **Deprecated `.env` REFRESH_TOKEN**: File `.env` untuk menyimpan token tunggal kini sudah ditinggalkan (*deprecated*). `blogger-publisher auth` kini wajib menggunakan parameter `accountId` dan menyimpan ke konfigurasi global multi-akun.
+
 ### Fixed
-- **SECURITY (Secrets Leak)**: Corrected `.npmignore` to properly exclude `.env` and `*.json` credentials from being packaged into NPM tarballs. (Version `1.3.3` was deprecated due to this issue).
+- **SECURITY (Secrets Leak)**: Corrected `.npmignore` to properly exclude `.env` and `*.json` credentials from being packaged into NPM tarballs.
+- **SECURITY (Path Traversal / Symlink Bypass)**: Memperbaiki celah keamanan eksekusi path lokal pada `validatePath` dengan menggunakan `fs.realpathSync` sehingga *symlink* berbahaya yang mengarah ke `/etc/passwd` akan diblokir.
+- **SECURITY (Timing Attacks)**: Menggunakan `crypto.timingSafeEqual` pada perbandingan API Key untuk mencegah pembocoran kunci lewat pengujian *latency*.
+- **OAuth Callback Router**: Memperbaiki rute `/api/accounts/_callback` yang sebelumnya terblokir oleh otentikasi API Key (*401 Unauthorized*).
 
 ## [1.3.3] - 2026-07-18
 
