@@ -1,0 +1,10 @@
+{
+  "id": "obsidian-blogger-publisher",
+  "name": "Blogger Publisher",
+  "version": "1.0.0",
+  "minAppVersion": "0.15.0",
+  "description": "Publish Obsidian notes to Blogger.com seamlessly with AI and Multi-CDN support.",
+  "author": "irfnrdh",
+  "authorUrl": "https://github.com/irfnrdh",
+  "isDesktopOnly": true
+}

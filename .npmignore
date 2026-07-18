@@ -1,0 +1,7 @@
+obsidian-plugin/
+docs/
+tests/
+*.md
+!README.md
+!AGENT.md
+!CHANGELOG.md
