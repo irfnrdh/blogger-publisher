@@ -5,3 +5,9 @@ tests/
 !README.md
 !AGENT.md
 !CHANGELOG.md
+
+# Security: Never publish secrets
+.env
+.env.*
+credentials.json
+token.json
