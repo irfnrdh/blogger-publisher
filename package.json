@@ -17,7 +17,8 @@
   },
   "bin": {
     "blogger-publisher": "bin/cli.js",
-    "mcp-blogger-server": "bin/mcp-server.js"
+    "mcp-blogger-server": "bin/mcp-server.js",
+    "blogger-publisher-serve": "bin/serve.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -56,6 +57,7 @@
     "googleapis": "^173.0.0",
     "gray-matter": "^4.0.3",
     "marked": "^18.0.6",
+    "node-cron": "^4.6.0",
     "picocolors": "^1.1.1",
     "turndown": "^7.2.4",
     "zod": "^4.4.3"
