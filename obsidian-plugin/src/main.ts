@@ -3,7 +3,7 @@ import * as child_process from 'child_process';
 import * as util from 'util';
 import * as path from 'path';
 
-const exec = util.promisify(child_process.exec);
+const execFile = util.promisify(child_process.execFile);
 
 interface BloggerPublisherSettings {
 	cliPath: string;
@@ -78,10 +78,10 @@ export default class BloggerPublisherPlugin extends Plugin {
 			new Notice(`🚀 Publishing ${activeFile.name} to Blogger...`);
 			try {
 				// Use the configured CLI path
-				const cmd = `"${this.settings.cliPath}" publish "${filePath}"`;
+				const cliCmd = this.settings.cliPath;
 				
-				// Execute command in the vault directory
-				const { stdout, stderr } = await exec(cmd, { cwd: vaultPath });
+				// Execute command in the vault directory using execFile to prevent injection
+				const { stdout, stderr } = await execFile(cliCmd, ['publish', filePath], { cwd: vaultPath });
 				
 				// Optional: You could parse stdout to show the public URL
 				console.log('Blogger Publisher [stdout]:', stdout);
@@ -117,8 +117,8 @@ export default class BloggerPublisherPlugin extends Plugin {
 
 			new Notice(`📥 Pulling posts from Blogger into /${pullDir}...`);
 			try {
-				const cmd = `"${this.settings.cliPath}" pull "${pullPath}"`;
-				const { stdout, stderr } = await exec(cmd, { cwd: vaultPath });
+				const cliCmd = this.settings.cliPath;
+				const { stdout, stderr } = await execFile(cliCmd, ['pull', pullPath], { cwd: vaultPath });
 				
 				console.log('Blogger Publisher Pull [stdout]:', stdout);
 				new Notice(`✅ Successfully pulled posts from Blogger!`);

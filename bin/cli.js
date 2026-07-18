@@ -57,7 +57,7 @@ async function main() {
 }
 
 main().catch((error) => {
-  if (error.response && error.response.data && error.response.data.error) {
+  if (error?.response?.data?.error?.message) {
     console.error(`\n❌ API Error [${error.response.status}]: ${error.response.data.error.message}`);
   } else if (error instanceof ZodError) {
     console.error(`\n❌ Validation Error:`);
