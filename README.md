@@ -1,7 +1,4 @@
----
-> 🌐 **[English version below](#english-version)**
-
----
+<div align="right">🌐 <a href="#english-version">English version below</a></div>
 
 # blogger-publisher
 
