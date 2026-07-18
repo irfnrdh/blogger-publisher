@@ -38,7 +38,7 @@
 
     <header class="hero">
         <div class="hero-content">
-            <span class="badge">✨ v1.2.0 Released - Now with 2-Way Sync</span>
+            <span class="badge">✨ v1.3.2 Released — Now with MCP Server & Interactive TUI</span>
             <h1>The Ultimate <br><span class="gradient-text">Auto-Blogging</span> Engine</h1>
             <p>A developer-first CLI tool to manage, sync, and publish thousands of Markdown articles to Google Blogger. Designed for massive scale, Multi-CDN support, and seamless AI integrations.</p>
             
@@ -71,20 +71,19 @@
                 </div>
                 <div class="terminal-body">
                     <div class="typewriter-line">
-                        <span class="prompt">➜</span> <span class="folder">~</span> <span class="typing">blogger-publisher publish ./articles</span>
+                        <span class="prompt">➜</span> <span class="folder">~/my-blog</span> <span class="typing">blogger-publisher</span>
                     </div>
                     <div class="terminal-output">
-                        <p class="fade-in d-1"><span class="c-dim">◇ injected env (4) from .env</span></p>
-                        <p class="fade-in d-2">Mencari file markdown di: ./articles...</p>
-                        <p class="fade-in d-3">========================================</p>
-                        <p class="fade-in d-4">📄 Memproses: belajar-ai-2026.md</p>
-                        <p class="fade-in d-5 c-blue">[UPLOAD] Menyimpan gambar ke ImgBB CDN...</p>
-                        <p class="fade-in d-6 c-green">✅ BERHASIL Diunggah. ID Baru: 726612158057</p>
-                        <p class="fade-in d-7">========================================</p>
-                        <p class="fade-in d-8">📄 Memproses: tips-kucing.md</p>
-                        <p class="fade-in d-9 c-yellow">[SKIP] Hashing identik. Melewati pembaruan...</p>
-                        <p class="fade-in d-10">========================================</p>
-                        <p class="fade-in d-11 c-green font-bold">🎉 PROSES BULK SELESAI!</p>
+                        <p class="fade-in d-1"><span class="c-blue">🚀 Blogger Publisher CLI</span> <span class="c-dim">v1.3.2</span></p>
+                        <p class="fade-in d-2 c-dim">? Apa yang ingin Anda lakukan?</p>
+                        <p class="fade-in d-3 c-green">❯ 🏗️  Init Workspace (Setup Folder, .env, & AI Agent)</p>
+                        <p class="fade-in d-4 c-dim">  🔑  Auth (Login ke Akun Google)</p>
+                        <p class="fade-in d-5 c-dim">  🚀  Publish Artikel</p>
+                        <p class="fade-in d-6 c-dim">  📥  Tarik (Pull) Artikel Lama</p>
+                        <p class="fade-in d-7"> </p>
+                        <p class="fade-in d-8 c-dim">◇ Setup Konfigurasi</p>
+                        <p class="fade-in d-9">│  Global Config berhasil dibuat!</p>
+                        <p class="fade-in d-10 c-green font-bold">🎉 Workspace berhasil dibuat! Anda kini siap nge-blog.</p>
                     </div>
                 </div>
             </div>
@@ -99,24 +98,34 @@
 
         <div class="features-grid">
             <div class="feature-card glass-card">
-                <div class="feature-icon icon-blue">🚀</div>
+                <div class="feature-icon icon-blue">🤖</div>
+                <h3>MCP Server (25 Tools)</h3>
+                <p>Register <code>mcp-blogger-server</code> di AI client Anda (Antigravity, Claude, Cursor) dan kelola seluruh blog via percakapan natural — tanpa sentuh terminal sama sekali.</p>
+            </div>
+            <div class="feature-card glass-card">
+                <div class="feature-icon icon-purple">🏗️</div>
+                <h3>Interactive TUI & Scaffolding</h3>
+                <p>Jalankan <code>blogger-publisher</code> tanpa argumen dan nikmati menu interaktif berwarna. <em>Init Workspace</em> membuatkan folder, config, dan contoh artikel otomatis.</p>
+            </div>
+            <div class="feature-card glass-card">
+                <div class="feature-icon icon-orange">🚀</div>
                 <h3>Multi-CDN Image Routing</h3>
-                <p>Never worry about Google Drive bandwidth limits again. Upload local Markdown images directly to ImgBB, Cloudinary, or GitHub jsDelivr automatically.</p>
+                <p>Upload gambar lokal langsung ke ImgBB, Cloudinary, atau GitHub jsDelivr secara otomatis — tanpa khawatir bandwidth limit Google Drive.</p>
             </div>
             <div class="feature-card glass-card">
-                <div class="feature-icon icon-purple">🔄</div>
+                <div class="feature-icon icon-green">🔄</div>
                 <h3>2-Way Sync (Pull & Push)</h3>
-                <p>Already have 100 posts on Blogger? Run <code>pull</code> to download them all as Markdown files, edit them locally, and <code>publish</code> them back instantly.</p>
+                <p>Sudah punya 100 post di Blogger? Jalankan <code>pull</code> untuk download semuanya jadi Markdown, edit lokal, lalu <code>publish</code> kembali seketika.</p>
             </div>
             <div class="feature-card glass-card">
-                <div class="feature-icon icon-orange">🤖</div>
-                <h3>AI Agent Ready</h3>
-                <p>Comes with built-in <code>AGENT.md</code> and Skills. Tell your favorite AI to "run autoblogging" and watch it generate and publish content on autopilot.</p>
+                <div class="feature-icon icon-blue">🌐</div>
+                <h3>Global Config (Bebas .env)</h3>
+                <p>Simpan kredensial sekali di <code>~/.blogger-publisher/config.json</code>. Publish dari folder mana pun di komputer Anda tanpa setup ulang.</p>
             </div>
             <div class="feature-card glass-card">
                 <div class="feature-icon icon-green">⚡</div>
-                <h3>Smart Hashing & SEO</h3>
-                <p>Saves your API quota by hashing your files. If you don't change the content, it skips uploading. Includes Custom URL Slugs & Meta Descriptions.</p>
+                <h3>Smart Hashing, Zod & SEO</h3>
+                <p>Hemat API quota dengan deteksi perubahan berbasis hash. Validasi frontmatter ketat dengan Zod. Mendukung Custom URL Slug & Meta Description.</p>
             </div>
         </div>
     </section>
