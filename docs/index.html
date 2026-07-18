@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blogger Publisher CLI | The Ultimate Auto-Blogging Engine</title>
-    <meta name="description" content="A powerful open-source Node.js CLI to automate your Blogger publishing. Supports Multi-CDN, Smart Hashing, AI Agents, and 2-Way Sync.">
+    <title>Blogger Publisher | CLI + MCP Server for Blogger.com</title>
+    <meta name="description" content="Full-featured CLI + MCP Server to manage Blogger.com via Markdown & AI. 25 MCP tools, Interactive TUI, Multi-CDN, 2-Way Sync, Auto Updater.">
+    <meta property="og:title" content="blogger-publisher — CLI + MCP Server for Blogger.com">
+    <meta property="og:description" content="Manage your entire Blogger.com blog with Markdown and AI. 25 MCP tools for natural language blog management.">
     
     <!-- Google Fonts: Inter & JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,7 +28,9 @@
         </div>
         <div class="nav-links">
             <a href="#features">Features</a>
+            <a href="#mcp">MCP Server</a>
             <a href="#how-it-works">How it Works</a>
+            <a href="GUIDE.md">Docs</a>
             <a href="https://github.com/irfnrdh/blogger-publisher" target="_blank" class="btn-github">
                 <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
                     <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
@@ -38,9 +42,9 @@
 
     <header class="hero">
         <div class="hero-content">
-            <span class="badge">✨ v1.3.2 Released — Now with MCP Server & Interactive TUI</span>
+            <span class="badge">✨ v1.3.2 — Now with MCP Server (25 Tools) & Interactive TUI</span>
             <h1>The Ultimate <br><span class="gradient-text">Auto-Blogging</span> Engine</h1>
-            <p>A developer-first CLI tool to manage, sync, and publish thousands of Markdown articles to Google Blogger. Designed for massive scale, Multi-CDN support, and seamless AI integrations.</p>
+            <p>A full-featured CLI + MCP Server to manage, sync, and publish Markdown articles to Google Blogger. Designed for AI-native workflows, Multi-CDN support, and global scale.</p>
             
             <div class="cta-group">
                 <a href="#install" class="btn-primary">Get Started Free</a>
@@ -51,7 +55,7 @@
             </div>
             
             <div class="social-proof">
-                <p>Loved by Developers & Autobloggers</p>
+                <p>Loved by Developers, AI Engineers & Autobloggers</p>
                 <div class="avatars">
                     <div class="avatar"></div><div class="avatar"></div><div class="avatar"></div>
                     <span>+1,000s of articles published</span>
@@ -67,7 +71,7 @@
                         <span class="dot yellow"></span>
                         <span class="dot green"></span>
                     </div>
-                    <div class="terminal-title">bash - master</div>
+                    <div class="terminal-title">bash — blogger-publisher</div>
                 </div>
                 <div class="terminal-body">
                     <div class="typewriter-line">
@@ -75,57 +79,149 @@
                     </div>
                     <div class="terminal-output">
                         <p class="fade-in d-1"><span class="c-blue">🚀 Blogger Publisher CLI</span> <span class="c-dim">v1.3.2</span></p>
-                        <p class="fade-in d-2 c-dim">? Apa yang ingin Anda lakukan?</p>
-                        <p class="fade-in d-3 c-green">❯ 🏗️  Init Workspace (Setup Folder, .env, & AI Agent)</p>
-                        <p class="fade-in d-4 c-dim">  🔑  Auth (Login ke Akun Google)</p>
-                        <p class="fade-in d-5 c-dim">  🚀  Publish Artikel</p>
-                        <p class="fade-in d-6 c-dim">  📥  Tarik (Pull) Artikel Lama</p>
+                        <p class="fade-in d-2 c-dim">? What would you like to do?</p>
+                        <p class="fade-in d-3 c-green">❯ 🏗️  Init Workspace</p>
+                        <p class="fade-in d-4 c-dim">  🔑  Auth (Google Login)</p>
+                        <p class="fade-in d-5 c-dim">  🚀  Publish Articles</p>
+                        <p class="fade-in d-6 c-dim">  📥  Pull from Blogger</p>
                         <p class="fade-in d-7"> </p>
-                        <p class="fade-in d-8 c-dim">◇ Setup Konfigurasi</p>
-                        <p class="fade-in d-9">│  Global Config berhasil dibuat!</p>
-                        <p class="fade-in d-10 c-green font-bold">🎉 Workspace berhasil dibuat! Anda kini siap nge-blog.</p>
+                        <p class="fade-in d-8 c-dim">◇ Setting up Global Config...</p>
+                        <p class="fade-in d-9">│  Config saved to ~/.blogger-publisher/config.json</p>
+                        <p class="fade-in d-10 c-green font-bold">🎉 Workspace ready! Happy blogging.</p>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
+    <!-- MCP Server Section -->
+    <section id="mcp" class="mcp-section">
+        <div class="section-title">
+            <h2>🤖 MCP Server — <span class="gradient-text">AI-Native Blog Management</span></h2>
+            <p>Register once. Talk to your AI. Your blog manages itself.</p>
+        </div>
+        <div class="mcp-layout">
+            <div class="mcp-config glass-card">
+                <div class="mcp-config-title">📄 mcp_config.json</div>
+                <pre><code>{
+  "mcpServers": {
+    "blogger": {
+      "command": "mcp-blogger-server"
+    }
+  }
+}</code></pre>
+                <p class="mcp-note">⚡ No extra env vars needed — auto-reads from Global Config</p>
+            </div>
+            <div class="mcp-tools">
+                <div class="mcp-category">
+                    <span class="cat-icon">📰</span>
+                    <div>
+                        <strong>Blogs (4)</strong>
+                        <code>list_blogs · get_blog · get_blog_by_url · get_blog_info</code>
+                    </div>
+                </div>
+                <div class="mcp-category">
+                    <span class="cat-icon">📝</span>
+                    <div>
+                        <strong>Posts (9)</strong>
+                        <code>list_posts · get_post · search_posts · create_post · update_post · publish_post · revert_post · delete_post · get_post_by_path</code>
+                    </div>
+                </div>
+                <div class="mcp-category">
+                    <span class="cat-icon">📄</span>
+                    <div>
+                        <strong>Pages (6)</strong>
+                        <code>list_pages · get_page · create_page · update_page · publish_page · delete_page</code>
+                    </div>
+                </div>
+                <div class="mcp-category">
+                    <span class="cat-icon">💬</span>
+                    <div>
+                        <strong>Comments (6)</strong>
+                        <code>list_comments · list_all_comments · get_comment · approve_comment · mark_comment_spam · delete_comment</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mcp-examples">
+            <p class="examples-title">Example natural language commands:</p>
+            <div class="example-chips">
+                <span class="chip">"List all my blogs"</span>
+                <span class="chip">"Create a draft post about AI tools"</span>
+                <span class="chip">"Approve all pending comments"</span>
+                <span class="chip">"Publish post ID 12345"</span>
+                <span class="chip">"Show blog statistics"</span>
+                <span class="chip">"Delete the spam comment"</span>
+            </div>
+        </div>
+    </section>
+
     <section id="features" class="features-section">
         <div class="section-title">
             <h2 class="gradient-text">Enterprise-Grade Features</h2>
-            <p>Everything you need to turn a simple Blogger site into a massive content empire.</p>
+            <p>Everything you need to turn a Blogger site into a massive, AI-managed content empire.</p>
         </div>
 
         <div class="features-grid">
             <div class="feature-card glass-card">
                 <div class="feature-icon icon-blue">🤖</div>
                 <h3>MCP Server (25 Tools)</h3>
-                <p>Register <code>mcp-blogger-server</code> di AI client Anda (Antigravity, Claude, Cursor) dan kelola seluruh blog via percakapan natural — tanpa sentuh terminal sama sekali.</p>
+                <p>Register <code>mcp-blogger-server</code> in any MCP-compatible AI client and manage your entire blog through natural language — no terminal needed.</p>
             </div>
             <div class="feature-card glass-card">
                 <div class="feature-icon icon-purple">🏗️</div>
                 <h3>Interactive TUI & Scaffolding</h3>
-                <p>Jalankan <code>blogger-publisher</code> tanpa argumen dan nikmati menu interaktif berwarna. <em>Init Workspace</em> membuatkan folder, config, dan contoh artikel otomatis.</p>
+                <p>Run <code>blogger-publisher</code> with no arguments for a guided, colorful interactive menu. <em>Init Workspace</em> creates folders, config, and sample articles automatically.</p>
             </div>
             <div class="feature-card glass-card">
                 <div class="feature-icon icon-orange">🚀</div>
                 <h3>Multi-CDN Image Routing</h3>
-                <p>Upload gambar lokal langsung ke ImgBB, Cloudinary, atau GitHub jsDelivr secara otomatis — tanpa khawatir bandwidth limit Google Drive.</p>
+                <p>Upload local images automatically to ImgBB, Cloudinary, or GitHub jsDelivr — no more Google Drive bandwidth limits.</p>
             </div>
             <div class="feature-card glass-card">
                 <div class="feature-icon icon-green">🔄</div>
                 <h3>2-Way Sync (Pull & Push)</h3>
-                <p>Sudah punya 100 post di Blogger? Jalankan <code>pull</code> untuk download semuanya jadi Markdown, edit lokal, lalu <code>publish</code> kembali seketika.</p>
+                <p>Already have 100 posts on Blogger? Run <code>pull</code> to download them all as Markdown, edit locally, then <code>publish</code> them back instantly.</p>
             </div>
             <div class="feature-card glass-card">
                 <div class="feature-icon icon-blue">🌐</div>
-                <h3>Global Config (Bebas .env)</h3>
-                <p>Simpan kredensial sekali di <code>~/.blogger-publisher/config.json</code>. Publish dari folder mana pun di komputer Anda tanpa setup ulang.</p>
+                <h3>Global Config (No More .env)</h3>
+                <p>Set up once in <code>~/.blogger-publisher/config.json</code>. Publish from any folder on your machine without re-configuring.</p>
             </div>
             <div class="feature-card glass-card">
                 <div class="feature-icon icon-green">⚡</div>
                 <h3>Smart Hashing, Zod & SEO</h3>
-                <p>Hemat API quota dengan deteksi perubahan berbasis hash. Validasi frontmatter ketat dengan Zod. Mendukung Custom URL Slug & Meta Description.</p>
+                <p>Save API quota with content-hash change detection. Strict Zod frontmatter validation. Custom URL slugs & meta descriptions supported.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="how-section">
+        <div class="section-title">
+            <h2>How It Works</h2>
+        </div>
+        <div class="steps">
+            <div class="step glass-card">
+                <div class="step-num">1</div>
+                <h3>Install</h3>
+                <code>npm i -g blogger-publisher</code>
+            </div>
+            <div class="step glass-card">
+                <div class="step-num">2</div>
+                <h3>Setup</h3>
+                <code>blogger-publisher</code>
+                <p>Follow the interactive TUI</p>
+            </div>
+            <div class="step glass-card">
+                <div class="step-num">3</div>
+                <h3>Write</h3>
+                <p>Create Markdown files in <code>articles/</code></p>
+            </div>
+            <div class="step glass-card">
+                <div class="step-num">4</div>
+                <h3>Publish</h3>
+                <code>blogger-publisher publish</code>
+                <p>Or talk to your AI via MCP</p>
             </div>
         </div>
     </section>
@@ -133,7 +229,13 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="logo">BloggerPublisher_</div>
-            <p>Built with ❤️ for the open-source community. Open source under MIT License.</p>
+            <p>Built with ❤️ for the open-source community. MIT License.</p>
+            <div class="footer-links">
+                <a href="https://github.com/irfnrdh/blogger-publisher" target="_blank">GitHub</a>
+                <a href="https://www.npmjs.com/package/blogger-publisher" target="_blank">NPM</a>
+                <a href="GUIDE.md">Docs</a>
+                <a href="CASE_STUDIES.md">Case Studies</a>
+            </div>
         </div>
     </footer>
 

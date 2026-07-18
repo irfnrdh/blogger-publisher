@@ -395,8 +395,112 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 .footer p { color: var(--text-secondary); font-size: 0.9rem; }
+.footer-links { display: flex; gap: 1.5rem; }
+.footer-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+.footer-links a:hover { color: var(--text-primary); }
+
+/* --------------------
+   MCP SECTION
+-------------------- */
+.mcp-section {
+    padding: 6rem 6%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+.mcp-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 2rem;
+    margin-top: 3rem;
+    align-items: start;
+}
+.mcp-config {
+    padding: 2rem;
+    border-radius: 16px;
+    font-family: 'JetBrains Mono', monospace;
+}
+.mcp-config-title {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    font-family: 'Inter', sans-serif;
+}
+.mcp-config pre {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: #a5f3fc;
+}
+.mcp-note {
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    color: var(--c-green);
+    font-family: 'Inter', sans-serif;
+}
+.mcp-tools { display: flex; flex-direction: column; gap: 1.2rem; }
+.mcp-category {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.2rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-glass);
+    border-radius: 12px;
+    transition: border-color 0.2s;
+}
+.mcp-category:hover { border-color: var(--border-highlight); }
+.cat-icon { font-size: 1.5rem; flex-shrink: 0; }
+.mcp-category strong { display: block; margin-bottom: 0.4rem; font-size: 0.95rem; }
+.mcp-category code { font-size: 0.78rem; color: var(--c-blue); font-family: 'JetBrains Mono', monospace; line-height: 1.6; }
+.mcp-examples { margin-top: 2.5rem; text-align: center; }
+.examples-title { color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.9rem; }
+.example-chips { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
+.chip {
+    padding: 0.5rem 1.2rem;
+    background: rgba(96, 165, 250, 0.1);
+    border: 1px solid rgba(96, 165, 250, 0.2);
+    border-radius: 999px;
+    font-size: 0.85rem;
+    color: var(--c-blue);
+    font-style: italic;
+    transition: all 0.2s;
+}
+.chip:hover { background: rgba(96, 165, 250, 0.2); border-color: rgba(96, 165, 250, 0.4); }
+
+/* --------------------
+   HOW IT WORKS
+-------------------- */
+.how-section {
+    padding: 5rem 6%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+.steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+.step {
+    padding: 2rem;
+    border-radius: 16px;
+    text-align: center;
+    position: relative;
+}
+.step-num {
+    width: 48px; height: 48px;
+    background: var(--accent-gradient);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 1.2rem;
+    margin: 0 auto 1rem;
+}
+.step h3 { font-size: 1.1rem; margin-bottom: 0.75rem; }
+.step code { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--c-blue); background: rgba(56,189,248,0.1); padding: 0.4rem 0.8rem; border-radius: 6px; display: block; margin-bottom: 0.5rem; }
+.step p { color: var(--text-secondary); font-size: 0.85rem; }
 
 /* Responsiveness */
 @media (max-width: 1024px) {
@@ -404,9 +508,13 @@ body {
     .hero-content { max-width: 100%; display: flex; flex-direction: column; align-items: center; }
     .cta-group { justify-content: center; }
     .hero-visual { max-width: 700px; }
+    .mcp-layout { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 768px) {
     .nav-links a:not(.btn-github) { display: none; }
-    .footer-content { flex-direction: column; gap: 1rem; text-align: center;}
+    .footer-content { flex-direction: column; gap: 1rem; text-align: center; }
+    .steps { grid-template-columns: 1fr; }
 }
+

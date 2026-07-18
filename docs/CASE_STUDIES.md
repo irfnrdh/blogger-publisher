@@ -1,32 +1,56 @@
-# 💡 Studi Kasus Penggunaan (Case Studies)
+# 💡 Case Studies
 
-Blogger Publisher bukan sekadar alat sederhana. Berikut adalah bagaimana para *Hacker* dan *Content Creator* memanfaatkan repositori ini di dunia nyata:
+Here's how developers, AI engineers, and content creators use `blogger-publisher` in the real world.
 
-## Kasus 1: Autoblog AI Sepenuhnya (Hands-Free)
-**Tujuan:** Membuat website yang mempublikasikan 5 berita harian tanpa campur tangan manusia.
+---
 
-**Cara Kerja:**
-1. Anda membuat script AI (atau menggunakan AI Agent dari repo ini via `AGENT.md`).
-2. Setiap jam 7 pagi, cron job (atau GitHub Actions) memerintahkan AI untuk membaca RSS berita terbaru.
-3. AI menulis artikel 1000 kata berformat Markdown lengkap dengan Frontmatter dan menyimpannya di folder `articles/`.
-4. Cron job mengeksekusi `blogger-publisher publish ./articles`.
-5. Gambar yang dibuat AI dari *local path* akan di-upload ke ImgBB, dan artikel tayang secara otomatis.
+## Case 1: Fully Automated AI Autoblog (Hands-Free)
 
-## Kasus 2: Migrasi dari WordPress ke Blogger
-**Tujuan:** Anda tidak ingin lagi membayar *hosting* bulanan WordPress dan ingin pindah ke Blogger yang gratis seumur hidup.
+**Goal:** A website that publishes 5 news articles daily without human intervention.
 
-**Cara Kerja:**
-1. Anda menggunakan *plugin* ekspor di WordPress untuk mendapatkan file `.md` (misalnya menggunakan *Gatsby/Hugo exporter*).
-2. Anda memindahkan 500 file `.md` tersebut ke folder `articles/` di project ini.
-3. Anda jalankan `blogger-publisher publish ./articles`.
-4. Sistem akan dengan pintar meng-upload 500 gambar lokal Anda ke Cloudinary, dan mem-publish ke 500 artikel Blogger tanpa terkena *rate-limit* (berkat fitur *Smart Delay*).
+**How it works:**
+1. You set up an AI Agent using `AGENT.md` (or any LLM of your choice).
+2. Every morning at 7 AM, a cron job commands the AI to fetch the latest news from an RSS feed.
+3. The AI writes a 1,000-word Markdown article with proper Frontmatter and saves it to `articles/`.
+4. The cron job runs `blogger-publisher publish ./articles`.
+5. Any AI-generated images are uploaded automatically to ImgBB/Cloudinary, and the article goes live.
 
-## Kasus 3: Master Branch sebagai CMS
-**Tujuan:** Menulis blog dari *smartphone* menggunakan aplikasi Markdown, lalu artikel otomatis tayang.
+---
 
-**Cara Kerja:**
-1. Repo ini Anda unggah ke GitHub dan Anda pasang rahasia rahasia (`.env` dan kredensial) di **GitHub Secrets**.
-2. Anda membuat GitHub Actions yang terpicu setiap kali ada perubahan pada folder `articles/`.
-3. Saat Anda jalan-jalan, Anda menggunakan aplikasi seperti *Obsidian* atau *GitHub App* di HP untuk membuat file `.md` baru.
-4. Saat Anda menekan *commit*, GitHub Actions berjalan, mengunggah gambar ke GitHub jsDelivr CDN, lalu melempar teksnya ke Google Blogger. 
-5. CMS 100% gratis dengan pengalaman kelas dunia!
+## Case 2: WordPress to Blogger Migration
+
+**Goal:** Stop paying for WordPress hosting and move to Blogger (free forever).
+
+**How it works:**
+1. Use a WordPress export plugin to get your posts as `.md` files (e.g. using a Gatsby/Hugo exporter).
+2. Drop your 500 `.md` files into the `articles/` folder.
+3. Run `blogger-publisher publish ./articles`.
+4. The system uploads 500 local images to Cloudinary and publishes all 500 articles to Blogger — without hitting API rate limits (thanks to Smart Delay).
+
+---
+
+## Case 3: GitHub as a Free CMS
+
+**Goal:** Write blog posts from your smartphone, and have them publish automatically when you commit.
+
+**How it works:**
+1. Upload this project to GitHub and store your credentials in **GitHub Secrets** (using the `blogger-publisher auth` refresh token).
+2. Create a GitHub Actions workflow triggered on changes to the `articles/` folder.
+3. While you're out, use an app like **Obsidian**, **iA Writer**, or the GitHub mobile app to create a new `.md` file.
+4. When you commit, GitHub Actions runs, uploads images to GitHub jsDelivr CDN, and publishes the article to Google Blogger automatically.
+5. A 100% free CMS with a world-class writing experience!
+
+---
+
+## Case 4: AI-Powered Blog Management via MCP Server
+
+**Goal:** Let your AI assistant manage your entire Blogger workflow via natural language.
+
+**How it works:**
+1. Register `mcp-blogger-server` in your MCP config file (one-time setup).
+2. Talk to your AI client (Antigravity, Claude Desktop, Cursor):
+   - *"List all my blogs and their stats"*
+   - *"Create a new draft post titled 'Top 10 AI Tools in 2026' on my tech blog"*
+   - *"Show all pending comments and approve the ones that look genuine"*
+   - *"Revert post ID 1234 back to draft"*
+3. The AI executes Blogger API calls on your behalf — no terminal needed.
