@@ -9,6 +9,46 @@ Sebuah *tool automation* open-source berbasis Node.js yang memungkinkan Anda (at
 
 Sangat cocok digunakan sebagai penghubung (*bridge*) jika Anda memiliki AI yang me-generate artikel dan ingin secara otomatis mem-postingnya ke blog Anda secara mandiri. Untuk integrasi AI, lihat [Panduan AI Agent (AGENT.md)](AGENT.md).
 
+---
+
+## 🤖 MCP Server (Model Context Protocol)
+
+`blogger-publisher` kini dilengkapi dengan **MCP Server bawaan** yang memungkinkan AI Agent apa pun (Antigravity, Claude Desktop, Cursor, Windsurf) mengelola blog Anda lewat percakapan natural.
+
+**25 tools tersedia**, mencakup:
+- 📰 **Blogs** (4 tools): `list_blogs`, `get_blog`, `get_blog_by_url`, `get_blog_info`
+- 📝 **Posts** (9 tools): `list_posts`, `get_post`, `search_posts`, `create_post`, `update_post`, `publish_post`, `revert_post`, `delete_post`, `get_post_by_path`
+- 📄 **Pages** (6 tools): `list_pages`, `get_page`, `create_page`, `update_page`, `publish_page`, `delete_page`
+- 💬 **Comments** (6 tools): `list_comments`, `list_all_comments`, `get_comment`, `approve_comment`, `mark_comment_spam`, `delete_comment`
+
+### Cara Mengaktifkan MCP Server
+
+**1. Install:**
+```bash
+npm install -g blogger-publisher
+```
+
+**2. Tambahkan ke MCP config** (`~/.gemini/antigravity/mcp_config.json` atau `claude_desktop_config.json`):
+```json
+{
+  "mcpServers": {
+    "blogger": {
+      "command": "mcp-blogger-server"
+    }
+  }
+}
+```
+
+> ⚡ Tidak perlu environment variable tambahan! MCP Server otomatis membaca dari Global Config yang sama dengan CLI (`~/.blogger-publisher/config.json`).
+
+**3. Bicara ke AI:**
+- *"List semua blogku"*
+- *"Buat post baru berjudul 'Halo Dunia' di blog ID 123456"*
+- *"Tampilkan semua komentar pending dan setujui yang sopan"*
+- *"Kembalikan post ID 789 ke status draft"*
+
+---
+
 ## 🚀 Quick Start (Interactive Mode)
 
 Cara paling mudah dan modern untuk memulai proyek autoblog Anda adalah menggunakan **Interactive TUI**:

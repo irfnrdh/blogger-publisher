@@ -2,7 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.3.1] - 2026-07-18
+## [1.3.2] - 2026-07-18
+
+### Added
+- **MCP Server (25 Tools!)**: `blogger-publisher` kini juga menjadi **MCP Server** lengkap. Setelah install, binary `mcp-blogger-server` tersedia secara otomatis. Daftarkan di `mcp_config.json` Anda dan AI agent apa pun bisa mengelola blog Anda via percakapan natural.
+  - **Blogs**: `list_blogs`, `get_blog`, `get_blog_by_url`, `get_blog_info`
+  - **Posts**: `list_posts`, `get_post`, `get_post_by_path`, `search_posts`, `create_post`, `update_post`, `publish_post`, `revert_post`, `delete_post`
+  - **Pages**: `list_pages`, `get_page`, `create_page`, `update_page`, `publish_page`, `delete_page`
+  - **Comments**: `list_comments`, `list_all_comments`, `get_comment`, `approve_comment`, `mark_comment_spam`, `delete_comment`
+- **MCP Resources**: `blogger://blogs`, `blogger://config`
+- **MCP Prompts**: `create_seo_post`, `moderate_comments`, `blog_audit`
 
 ### Added
 - **Global Configuration**: Pengguna kini menyimpan kredensial di `~/.blogger-publisher/config.json`. Anda cukup melakukan otentikasi sekali seumur hidup dan bisa nge-blog dari *folder* mana saja tanpa memikirkan `.env`.
